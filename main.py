@@ -1,63 +1,31 @@
-from influxdb import InfluxDBClient
+import influxdb_client
+from influxdb_client.client.write_api import  SYNCHRONOUS
+from random import randint
 
 def main():
-    inf_server = '172.21.23.2'
-    inf_port = 8086
-    user = "bmp"
-    database = "bmp"
-    password = "12qwasZX"
 
-    client = InfluxDBClient(host=inf_server,
-                            port=inf_port,
-                            username=user,
-                            database=database,
-                            password=password,
-                            ssl=False)
+    bucket ="bmp"
+    org ="test1"
+    token ="i4QpZZdrLt7VoShlQggHg2Dn4vGwsNijgGC9hfeasfJfpYWmm0MuwwppX1toRWW6wF6wHtSmxwW5DjgQGxWqpw=="
+    url ="http://172.21.24.2:8086"
 
-    # print(client.get_list_database())
+
+    # client = influxdb_client.InfluxDBClient(url=url,
+    #                                         token=token,
+    #                                         org=org)
+    # write_api = client.write_api(write_options=SYNCHRONOUS)
     #
-    # json_body = [
-    #     {
-    #         "measurement": "brushEvents",
-    #         "tags": {
-    #             "user": "Carol",
-    #             "brushId": "6c89f539-71c6-490d-a28d-6c5d84c0ee2f"
-    #         },
-    #         "time": "2018-03-28T8:01:00Z",
-    #         "fields": {
-    #             "duration": 127
-    #         }
-    #     },
-    #     {
-    #         "measurement": "brushEvents",
-    #         "tags": {
-    #             "user": "Carol",
-    #             "brushId": "6c89f539-71c6-490d-a28d-6c5d84c0ee2f"
-    #         },
-    #         "time": "2018-03-29T8:04:00Z",
-    #         "fields": {
-    #             "duration": 132
-    #         }
-    #     },
-    #     {
-    #         "measurement": "brushEvents",
-    #         "tags": {
-    #             "user": "Carol",
-    #             "brushId": "6c89f539-71c6-490d-a28d-6c5d84c0ee2f"
-    #         },
-    #         "time": "2018-03-30T8:02:00Z",
-    #         "fields": {
-    #             "duration": 129
-    #         }
-    #     }
-    # ]
-    #
-    # print(client.write_points(json_body))
+    # p = influxdb_client.Point("MyMeasurement").tag("location","istanbul").field("temperature", float(randint(10,36)))
+    # write_api.write(bucket=bucket,
+    #                 org=org,
+    #                 record=p)
 
+
+    #
     with open('1649861284.6593025.msg','r') as file:
         lines = file.readlines()
         for line in lines:
-            print(type(line),line)
+            print(line)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
